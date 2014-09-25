@@ -2,7 +2,7 @@
 
 This is an iOS demo Twitter application. You can read tweets from people you follow, and submit your own tweets.
 
-Time spent: 0 hours spent in total
+Time spent: 2.5 hours spent in total
 
 Completed user stories:
 
