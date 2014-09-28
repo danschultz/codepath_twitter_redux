@@ -22,7 +22,7 @@ class TweetTableViewCell: UITableViewCell {
         
         nameLabel.text = "Dan Schultz"
         screenNameLabel.text = "@danschultz"
-        messageLabel.text = "Chillwave whatever leggings pork belly, XOXO forage Godard. Raw denim chillwave crucifix wolf single-origin coffee street art pickled, fingerstache artisan roof party you probably haven't heard of them heirloom. Vinyl Kickstarter bitters, dreamcatcher XOXO street art single-origin coffee actually PBR Godard."
+        messageLabel.text = "Chillwave whatever leggings pork belly, XOXO forage Godard. Raw denim chillwave crucifix wolf single-origin coffee street art pickled."
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

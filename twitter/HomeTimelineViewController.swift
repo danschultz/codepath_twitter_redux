@@ -8,20 +8,27 @@
 
 import UIKit
 
-class HomeTimelineViewController: UIViewController, UITableViewDataSource {
+class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tweetsTableView: UITableView!
+    
+    var twitterClient = TwitterClient.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tweetsTableView.rowHeight = UITableViewAutomaticDimension
         tweetsTableView.dataSource = self
+        tweetsTableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func loadUserAndTweetData() {
+        
     }
 
     // MARK: - Table View Shiz
@@ -32,6 +39,10 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as UITableViewCell
         return cell
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 }
 

@@ -10,6 +10,14 @@ import UIKit
 
 class TweetViewController: UIViewController {
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
