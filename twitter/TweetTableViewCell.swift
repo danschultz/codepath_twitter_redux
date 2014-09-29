@@ -42,7 +42,7 @@ class TweetTableViewCell: UITableViewCell {
         screenNameLabel.text = "@\(tweet!.user.screenName)"
         messageLabel.text = tweet!.text
         profileImage.setImageWithURL(tweet!.user.profileImageUrl)
-        timeLabel.text = tweet!.createdAt.timeAgo()
+        timeLabel.text = tweet!.timeAgo
     }
 
 }

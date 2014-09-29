@@ -11,16 +11,9 @@ import UIKit
 class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tweetsTableView: UITableView!
+    var refreshControl: UIRefreshControl?
     
-    var _tweets: [Tweet]?
-    var tweets: [Tweet]? {
-        get {
-            return _tweets
-        }
-        set {
-            _tweets = newValue
-        }
-    }
+    var tweets: [Tweet]?
     
     private var selectedTweet: Tweet?
     
@@ -32,9 +25,33 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         tweetsTableView.rowHeight = UITableViewAutomaticDimension
         tweetsTableView.dataSource = self
         tweetsTableView.delegate = self
+        
+        var refreshControl = UIRefreshControl()
+        tweetsTableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: "handleRefreshRequest:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
+    }
+    
+    func reloadTweets() {
+        if let lastTweet = tweets?.first {
+            twitterClient.homeTimelineAfterTweetWithId(lastTweet.id) { (tweets, error) in
+                if (tweets != nil) {
+                    for tweet in tweets.reverse() {
+                        self.tweets?.insert(tweet, atIndex: 0)
+                    }
+                    
+                    self.tweetsTableView.reloadData()
+                }
+                
+                self.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     // MARK: - Actions
+    func handleRefreshRequest(sender: UIRefreshControl) {
+        reloadTweets()
+    }
 
     // MARK: - Table View Shiz
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
