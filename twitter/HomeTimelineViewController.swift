@@ -19,11 +19,11 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         }
         set {
             _tweets = newValue
-//            tweetsTableView.reloadData()
         }
     }
     
-    var twitterClient = TwitterClient.sharedInstance
+    private var selectedTweet: Tweet?
+    private var twitterClient = TwitterClient.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +51,25 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let loadedTweets = tweets {
+            selectedTweet = loadedTweets[indexPath.row]
+            performSegueWithIdentifier("HomeTimelineToTweet", sender: self)
+        }
+    }
+    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    
+    // MARK: - Segues
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        if (segue.identifier == "HomeTimelineToTweet") {
+            var tweetViewController = segue.destinationViewController as TweetViewController
+            tweetViewController.tweet = selectedTweet
+        }
     }
 }
 

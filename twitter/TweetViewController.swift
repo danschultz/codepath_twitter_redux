@@ -18,26 +18,32 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     
+    @IBOutlet weak var favoriteButton: UIImageView!
+    
+    var tweet: Tweet?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        updateControls()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func updateControls() {
+        profileImage.setImageWithURL(tweet!.user.profileImageUrl)
+        nameLabel.text = tweet!.user.name
+        screenNameLabel.text = tweet!.user.screenName
+        messageLabel.text = tweet!.text
+        retweetCountLabel.text = "\(tweet!.retweetCount)"
+        favoriteCountLabel.text = "\(tweet!.favoriteCount)"
+        
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "M/dd/yyyy h:mm a"
+        dateLabel.text = dateFormatter.stringFromDate(tweet!.createdAt)
+        
+        updateFavoriteButton()
     }
-    */
-
+    
+    private func updateFavoriteButton() {
+        var imageName = tweet!.hasFavorites ? "Favorited" : "Favorite"
+        favoriteButton.image = UIImage(named: imageName)
+    }
 }

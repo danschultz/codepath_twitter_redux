@@ -172,7 +172,6 @@
                                             <outlet property="profileImage" destination="JH2-Vi-gEv" id="n77-bU-3D4"/>
                                             <outlet property="screenNameLabel" destination="wOh-ZV-bg3" id="vCs-NF-UsQ"/>
                                             <outlet property="timeLabel" destination="vtB-9v-cSh" id="g24-03-XdN"/>
-                                            <segue destination="Sh7-Zx-AEF" kind="show" id="tRz-et-Lq5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -190,12 +189,13 @@
                         <barButtonItem key="leftBarButtonItem" title="Sign Out" id="y7R-LR-nd3"/>
                         <barButtonItem key="rightBarButtonItem" title="New" id="pK6-2F-SAm">
                             <connections>
-                                <segue destination="3zm-pV-bam" kind="presentation" id="xPU-ut-DYU"/>
+                                <segue destination="3zm-pV-bam" kind="presentation" identifier="" id="xPU-ut-DYU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tweetsTableView" destination="YHL-Ls-xxy" id="Mf8-Fk-yAN"/>
+                        <segue destination="Sh7-Zx-AEF" kind="show" identifier="HomeTimelineToTweet" id="DqF-FH-Nr6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -375,6 +375,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="AYc-kc-z9R" id="LBG-Uv-iiw"/>
+                        <outlet property="favoriteButton" destination="khK-x0-Ubt" id="uW9-P1-Lxz"/>
                         <outlet property="favoriteCountLabel" destination="GkG-4e-E1e" id="ZYm-YV-fBO"/>
                         <outlet property="messageLabel" destination="t7V-Y7-6N7" id="PoI-CV-dcO"/>
                         <outlet property="nameLabel" destination="Sh0-N2-cpJ" id="1IT-WU-xDd"/>
@@ -480,7 +481,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mb-E6-in9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3318" y="270"/>
+            <point key="canvasLocation" x="1870" y="250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B53-N4-0sB">
@@ -562,6 +563,6 @@
         <image name="Twitter Logo (White)" width="569" height="463"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xPU-ut-DYU"/>
+        <segue reference="qc1-iv-Ylh"/>
     </inferredMetricsTieBreakers>
 </document>
