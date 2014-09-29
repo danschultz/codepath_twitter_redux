@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComposeTweetViewController: UIViewController {
+class ComposeTweetViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -16,22 +16,48 @@ class ComposeTweetViewController: UIViewController {
     @IBOutlet weak var messageField: UITextView!
     @IBOutlet weak var remainingCharsLabel: UILabel!
     @IBOutlet weak var postButton: UIButton!
+    @IBOutlet weak var messagePlaceholder: UILabel!
+    
+    var user: User {
+        get {
+            var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            return appDelegate.applicationModel.signedInUser!
+        }
+    }
+    
+    var initialMessage: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updateControls()
+        
+        messageField.delegate = self
+        messageField.becomeFirstResponder()
     }
     
+    private func updateControls() {
+        profileImage.setImageWithURL(user.profileImageUrl)
+        nameLabel.text = user.name
+        screenNameLabel.text = user.screenName
+        messageField.text = initialMessage != nil ? initialMessage : ""
+        
+        updateInputtedText()
+    }
+    
+    private func updateInputtedText() {
+        messagePlaceholder.hidden = messageField.hasText()
+        remainingCharsLabel.text = "\(160 - countElements(messageField.text))"
+    }
+    
+    // MARK: - Text view delegate methods
+    func textViewDidChange(textView: UITextView) {
+        updateInputtedText()
+    }
+    
+    // MARK: - Actions
     @IBAction func handleCancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation

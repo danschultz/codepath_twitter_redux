@@ -40,9 +40,11 @@ class SplashViewController: UIViewController {
         twitterClient.requestSerializer.saveAccessToken(accessToken)
         presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
         
-        twitterClient.homeTimeline() { (tweets, error) in
-            if (tweets != nil) {
-                self.showTimelineView(tweets)
+        loadSignedInUser() { _ in
+            self.twitterClient.homeTimeline() { (tweets, error) in
+                if (tweets != nil) {
+                    self.showTimelineView(tweets)
+                }
             }
         }
     }
@@ -56,6 +58,14 @@ class SplashViewController: UIViewController {
     private func handleAccessTokenFailure(error: NSError!) {
         println("error getting access token")
         println("\(error)")
+    }
+    
+    func loadSignedInUser(handler: (User!) -> Void) {
+        twitterClient.verifyAccountCredentials() { (user, error) in
+            var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.applicationModel.signedInUser = user
+            handler(user)
+        }
     }
     
     func signOut() {

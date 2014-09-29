@@ -41,4 +41,15 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 handler(nil, error)
             })
     }
+    
+    func verifyAccountCredentials(handler: ((User!, NSError!) -> Void)!) {
+        GET("1.1/account/verify_credentials.json", parameters: nil,
+            success: { (operation, data) in
+                var user = User(values: data as NSDictionary)
+                handler(user, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+        })
+    }
 }
