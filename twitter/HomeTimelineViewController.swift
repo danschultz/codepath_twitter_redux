@@ -12,6 +12,17 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet weak var tweetsTableView: UITableView!
     
+    var _tweets: [Tweet]?
+    var tweets: [Tweet]? {
+        get {
+            return _tweets
+        }
+        set {
+            _tweets = newValue
+//            tweetsTableView.reloadData()
+        }
+    }
+    
     var twitterClient = TwitterClient.sharedInstance
     
     override func viewDidLoad() {
@@ -26,18 +37,17 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    private func loadUserAndTweetData() {
-        
-    }
 
     // MARK: - Table View Shiz
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tweets != nil ? tweets!.count : 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as TweetTableViewCell
+        if let loadedTweets = tweets {
+            cell.tweet = loadedTweets[indexPath.row]
+        }
         return cell
     }
     

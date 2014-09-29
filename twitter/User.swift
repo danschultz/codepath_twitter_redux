@@ -9,15 +9,15 @@
 import UIKit
 
 class User: NSObject {
-    var name: NSString
-    var screenName: NSString
+    var name: String
+    var screenName: String
     var profileImageUrl: NSURL
-    var tagline: NSString
+    var tagline: String?
     
     init(values: NSDictionary) {
-        name = values["name"] as NSString
-        screenName = values["screen_name"] as NSString
-        profileImageUrl = NSURL(string: values["profile_image_url"] as NSString)
-        tagline = values["tagline"] as NSString
+        name = values["name"] as String
+        screenName = values["screen_name"] as String
+        profileImageUrl = NSURL(string: values["profile_image_url"] as String)
+        tagline = values["tagline"] as? String
     }
 }

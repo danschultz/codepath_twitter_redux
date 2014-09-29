@@ -2,12 +2,12 @@
 
 This is an iOS demo Twitter application. You can read tweets from people you follow, and submit your own tweets.
 
-Time spent: 2.5 hours spent in total
+Time spent: 7.5 hours spent in total
 
 Completed user stories:
 
-* [ ] User can sign in using OAuth login flow
-* [ ] User can view last 20 tweets from their home timeline
+* [x] User can sign in using OAuth login flow
+* [x] User can view last 20 tweets from their home timeline
 * [ ] The current signed in user will be persisted across restarts
 * [ ] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp. In other words, design the custom cell with the proper Auto Layout settings. You will also need to augment the model classes.
 * [ ] User can pull to refresh

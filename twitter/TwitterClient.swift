@@ -18,4 +18,16 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         return Static.instance
     }
     
+    func homeTimeline(handler: (([Tweet]!, NSError!) -> Void)!) {
+        GET("1.1/statuses/home_timeline.json", parameters: nil,
+            success: { (operation, data) in
+                var tweets = data as [NSDictionary]
+                var parsedTweets = tweets.map({ Tweet(values: $0) })
+                handler(parsedTweets, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+            })
+    }
+    
 }

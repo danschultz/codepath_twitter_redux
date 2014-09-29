@@ -12,8 +12,12 @@ class SplashViewController: UIViewController {
     
     var twitterClient = TwitterClient.sharedInstance
     
+    var initialTweets: [Tweet]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
 
         // If the user isn't logged in, then they need to log in.
         
@@ -31,12 +35,39 @@ class SplashViewController: UIViewController {
         println("got the access token")
         twitterClient.requestSerializer.saveAccessToken(accessToken)
         presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+        
+        twitterClient.homeTimeline() { (tweets, error) in
+            if (tweets != nil) {
+                self.showTimelineView(tweets)
+            }
+        }
+    }
+    
+    private func showTimelineView(tweets: [Tweet]) {
+        initialTweets = tweets
+        performSegueWithIdentifier("SplashToHomeTimeline", sender: self)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func handleAccessTokenFailure(error: NSError!) {
         println("error getting access token")
         println("\(error)")
 //        presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - Segues
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        var tempSender = sender as? UIViewController
+        
+        if (tempSender == self) {
+            if (segue.identifier == "SplashToHomeTimeline") {
+                var navigationController = segue.destinationViewController as UINavigationController
+                var timelineViewController = navigationController.childViewControllers[0] as HomeTimelineViewController
+                timelineViewController.tweets = initialTweets
+            }
+        }
     }
 
     /*
