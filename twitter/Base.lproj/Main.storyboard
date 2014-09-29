@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKz-Sk-JEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1596" y="250"/>
+            <point key="canvasLocation" x="-844" y="250"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="lGj-48-yZ1">
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="09y-gU-PiI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-767" y="250"/>
+            <point key="canvasLocation" x="-844" y="1856"/>
         </scene>
         <!--Home-->
         <scene sceneID="ufC-wZ-h7g">
@@ -126,19 +126,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSu-5t-oT9">
-                                                    <rect key="frame" x="88" y="22" width="86" height="20.5"/>
+                                                    <rect key="frame" x="88" y="22" width="86" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="@screenname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOh-ZV-bg3">
-                                                    <rect key="frame" x="182" y="22" width="107.5" height="20.5"/>
+                                                    <rect key="frame" x="182" y="22" width="108" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtB-9v-cSh">
-                                                    <rect key="frame" x="564" y="22" width="19.5" height="20.5"/>
+                                                    <rect key="frame" x="564" y="22" width="20" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -186,7 +186,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="GEl-mV-is6">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="y7R-LR-nd3"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="y7R-LR-nd3">
+                            <connections>
+                                <segue destination="b1b-6R-o2b" kind="unwind" identifier="HomeTimelineToSplash" unwindAction="unwindToSplash:" id="neD-zx-Okw"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="New" id="pK6-2F-SAm">
                             <connections>
                                 <segue destination="3zm-pV-bam" kind="presentation" identifier="" id="xPU-ut-DYU"/>
@@ -199,8 +203,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <exit id="b1b-6R-o2b" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="132" y="250"/>
+            <point key="canvasLocation" x="10" y="250"/>
         </scene>
         <!--Tweet-->
         <scene sceneID="so8-ST-VoY">
@@ -230,25 +235,25 @@
                                 </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh0-N2-cpJ">
-                                <rect key="frame" x="72" y="86" width="512" height="20.5"/>
+                                <rect key="frame" x="72" y="86" width="512" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="screenname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqk-Rx-7yS">
-                                <rect key="frame" x="72" y="105" width="512" height="20.5"/>
+                                <rect key="frame" x="72" y="105" width="512" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7V-Y7-6N7">
-                                <rect key="frame" x="16" y="152" width="568" height="26.5"/>
+                                <rect key="frame" x="16" y="152" width="568" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9/26/14 9:54 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYc-kc-z9R">
-                                <rect key="frame" x="16" y="186" width="107.5" height="17"/>
+                                <rect key="frame" x="16" y="186" width="108" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -386,7 +391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dp9-cA-dw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="1244"/>
+            <point key="canvasLocation" x="10" y="1022"/>
         </scene>
         <!--Compose Tweet View Controller-->
         <scene sceneID="EPd-Wn-WQi">
@@ -481,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mb-E6-in9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1870" y="250"/>
+            <point key="canvasLocation" x="1454" y="250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B53-N4-0sB">
@@ -499,7 +504,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C91-cv-Zes" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-557"/>
+            <point key="canvasLocation" x="10" y="-557"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z5a-Df-pQE">
@@ -517,7 +522,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se7-fQ-Dza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="931" y="250"/>
+            <point key="canvasLocation" x="749" y="250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="six-40-7xe">
@@ -535,7 +540,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzj-8y-91N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-767" y="-557"/>
+            <point key="canvasLocation" x="-844" y="1049"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="G85-nP-dOt">
@@ -553,7 +558,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMm-Rt-DDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1596" y="-557"/>
+            <point key="canvasLocation" x="-844" y="-557"/>
         </scene>
     </scenes>
     <resources>
@@ -563,6 +568,6 @@
         <image name="Twitter Logo (White)" width="569" height="463"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qc1-iv-Ylh"/>
+        <segue reference="xPU-ut-DYU"/>
     </inferredMetricsTieBreakers>
 </document>

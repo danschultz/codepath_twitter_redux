@@ -22,6 +22,7 @@
 		377EDD1419D424690024BF07 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EDD1319D424690024BF07 /* TweetTableViewCell.swift */; };
 		37CA0D7F19D8BBE00073EE4D /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA0D7E19D8BBE00073EE4D /* Tweet.swift */; };
 		37CA0D8119D8BC0F0073EE4D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA0D8019D8BC0F0073EE4D /* User.swift */; };
+		37CA0D8319D93DB80073EE4D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA0D8219D93DB80073EE4D /* Settings.swift */; };
 		9C80D7E98AB64320A760A5EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53ED0C571C9B486CBA0BFB52 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		377EDD1319D424690024BF07 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		37CA0D7E19D8BBE00073EE4D /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		37CA0D8019D8BC0F0073EE4D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		37CA0D8219D93DB80073EE4D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		53ED0C571C9B486CBA0BFB52 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		89712253045549DB807C4173 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 				377EDCE919D410D20024BF07 /* Supporting Files */,
 				3743D5C819D7467A004D2AD1 /* SplashViewController.swift */,
 				3743D5CC19D74C89004D2AD1 /* TwitterClient.swift */,
+				37CA0D8219D93DB80073EE4D /* Settings.swift */,
 			);
 			path = twitter;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				3743D5C919D7467A004D2AD1 /* SplashViewController.swift in Sources */,
 				377EDD1419D424690024BF07 /* TweetTableViewCell.swift in Sources */,
 				37CA0D8119D8BC0F0073EE4D /* User.swift in Sources */,
+				37CA0D8319D93DB80073EE4D /* Settings.swift in Sources */,
 				377EDCEC19D410D20024BF07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

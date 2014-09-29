@@ -11,6 +11,7 @@ import UIKit
 class SplashViewController: UIViewController {
     
     var twitterClient = TwitterClient.sharedInstance
+    var settings = Settings.sharedInstance
     
     var initialTweets: [Tweet]?
     
@@ -19,9 +20,10 @@ class SplashViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(true, animated: false)
 
-        // If the user isn't logged in, then they need to log in.
-        
-        // Otherwise, load the latest tweets, then go to the home view.
+        // If the user has already logged in, then load the newest tweets and go to the home timeline view
+        if (settings.apiAccessToken != nil) {
+            handleAccessTokenSuccess(settings.apiAccessToken)
+        }
     }
     
     func finishAuthorizationWithParamsFromUrl(url: NSURL) {
@@ -32,7 +34,9 @@ class SplashViewController: UIViewController {
     }
     
     private func handleAccessTokenSuccess(accessToken: BDBOAuthToken!) {
-        println("got the access token")
+        settings.apiAccessToken = accessToken
+        settings.save()
+        
         twitterClient.requestSerializer.saveAccessToken(accessToken)
         presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
         
@@ -52,7 +56,13 @@ class SplashViewController: UIViewController {
     private func handleAccessTokenFailure(error: NSError!) {
         println("error getting access token")
         println("\(error)")
-//        presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func signOut() {
+        settings.apiAccessToken = nil
+        settings.save()
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Segues
@@ -68,6 +78,10 @@ class SplashViewController: UIViewController {
                 timelineViewController.tweets = initialTweets
             }
         }
+    }
+    
+    @IBAction func unwindToSplash(segue: UIStoryboardSegue) {
+        signOut()
     }
 
     /*

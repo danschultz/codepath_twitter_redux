@@ -37,8 +37,6 @@ class AuthViewController: UIViewController, UIWebViewDelegate {
     }
     
     private func handleRequestTokenSuccess(requestToken: BDBOAuthToken!) {
-        println("got the request token")
-        
         var authorizeUrl = NSURL(string: "\(twitterClient.baseURL)/oauth/authorize?oauth_token=\(requestToken.token)")
         var authorizeRequest = NSURLRequest(URL: authorizeUrl)
         webView.loadRequest(authorizeRequest)

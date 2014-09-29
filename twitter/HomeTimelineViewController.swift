@@ -23,6 +23,7 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     private var selectedTweet: Tweet?
+    
     private var twitterClient = TwitterClient.sharedInstance
     
     override func viewDidLoad() {
@@ -32,11 +33,8 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         tweetsTableView.dataSource = self
         tweetsTableView.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+    // MARK: - Actions
 
     // MARK: - Table View Shiz
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
