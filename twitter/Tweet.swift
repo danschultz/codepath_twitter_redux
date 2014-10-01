@@ -86,6 +86,14 @@ class Tweet: NSObject {
         }
     }
     
+    func reply(message: String, client: TwitterClient, handler: (Tweet!, NSError!) -> Void) {
+        assert(id != nil, "replying to a unsaved tweet is not supported yet")
+        
+        client.updateStatus(message, inReplyToStatusId: id) { (tweet, error) in
+            handler(tweet, error)
+        }
+    }
+    
     private func copyValuesFromTweet(tweet: Tweet) {
         id = tweet.id
         user = tweet.user
