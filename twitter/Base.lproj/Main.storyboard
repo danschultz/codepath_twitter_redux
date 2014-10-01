@@ -543,12 +543,12 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="New" id="Gy9-nq-wDX">
                             <connections>
-                                <segue destination="3zm-pV-bam" kind="show" identifier="HomeTimelineToCompose" id="RZF-Gs-E0U"/>
+                                <segue destination="3zm-pV-bam" kind="presentation" identifier="HomeTimelineToCompose" id="AxQ-Zk-QeW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Sh7-Zx-AEF" kind="show" identifier="HomeTimelineToTweet" id="vs9-Lc-gf7"/>
+                        <segue destination="Sh7-Zx-AEF" kind="show" identifier="HomeTimelineToTweet" id="vQe-i5-f8N"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5K-iA-kNz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -626,7 +626,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GPD-74-FD0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10" y="-557"/>
+            <point key="canvasLocation" x="10" y="-551"/>
         </scene>
     </scenes>
     <resources>
@@ -636,6 +636,6 @@
         <image name="Twitter Logo (White)" width="569" height="463"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RZF-Gs-E0U"/>
+        <segue reference="AxQ-Zk-QeW"/>
     </inferredMetricsTieBreakers>
 </document>

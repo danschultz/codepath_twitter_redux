@@ -25,11 +25,16 @@ class SplashViewController: UIViewController {
             NSForegroundColorAttributeName : headerTextColor
         ]
         navigationController?.setNavigationBarHidden(true, animated: false)
-
+        navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        
         // If the user has already logged in, then load the newest tweets and go to the home timeline view
         if (settings.apiAccessToken != nil) {
             handleAccessTokenSuccess(settings.apiAccessToken)
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
     
     func finishAuthorizationWithParamsFromUrl(url: NSURL) {
