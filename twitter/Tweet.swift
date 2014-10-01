@@ -9,40 +9,90 @@
 import UIKit
 
 class Tweet: NSObject {
-    var id: Int
-    var user: User
-    var text: String
-    var createdAt: NSDate
-    dynamic var retweetCount: Int
-    dynamic var favoriteCount: Int
+    var id: Int?
+    var user: User!
+    var text: String!
+    var createdAt: NSDate!
+    var favorited: Bool!
+    var retweetCount: Int!
+    var favoriteCount: Int!
     
-    var hasFavorites: Bool {
+    var hasFavorites: Bool! {
         get {
             return favoriteCount > 0
         }
     }
     
-    var hasRetweets: Bool {
+    var hasRetweets: Bool! {
         get {
             return retweetCount > 0
         }
     }
     
-    var timeAgo: String {
+    var timeAgo: String! {
         get {
             return createdAt.timeAgo()
         }
     }
     
     init(values: NSDictionary) {
-        id = values["id"] as Int
-        user = User(values: values["user"] as NSDictionary)
+        // Required fields, for creating a new tweet
         text = values["text"] as String
-        retweetCount = values["retweet_count"] as Int
-        favoriteCount = values["favorite_count"] as Int
+        user = values["user"] is User ? values["user"] as User : User(values: values["user"] as NSDictionary)
         
-        var formatter = NSDateFormatter()
-        formatter.dateFormat = "EEE MMM d HH:mm:ss Z y";
-        createdAt = formatter.dateFromString(values["created_at"] as String)!
+        if (values["created_at"] != nil) {
+            var formatter = NSDateFormatter()
+            formatter.dateFormat = "EEE MMM d HH:mm:ss Z y";
+            createdAt = formatter.dateFromString(values["created_at"] as String)!
+        } else {
+            createdAt = NSDate()
+        }
+        
+        // Optional fields
+        id = values["id"] as? Int
+        favorited = values["favorited"] as? Bool
+        retweetCount = values["retweet_count"] as? Int
+        favoriteCount = values["favorite_count"] as? Int
+    }
+    
+    func toggleFavorite(client: TwitterClient, handler: (error: NSError!) -> Void) {
+        if (!favorited) {
+            client.favoriteTweetWithId(id!) { (tweet, error) in
+                if (tweet != nil) {
+                    self.copyValuesFromTweet(tweet)
+                }
+                handler(error: error)
+            }
+        } else {
+            client.unfavoriteTweetWithId(id!) { (tweet, error) in
+                if (tweet != nil) {
+                    self.copyValuesFromTweet(tweet)
+                }
+                handler(error: error)
+            }
+        }
+    }
+    
+    func save(client: TwitterClient, handler: (error: NSError!) -> Void) {
+        if (id == nil) {
+            client.updateStatus(text, inReplyToStatusId: nil) { (tweet, error) in
+                if (error == nil) {
+                    self.copyValuesFromTweet(tweet)
+                }
+                handler(error: error)
+            }
+        } else {
+            println("editing a tweet is unhandled for now")
+        }
+    }
+    
+    private func copyValuesFromTweet(tweet: Tweet) {
+        id = tweet.id
+        user = tweet.user
+        text = tweet.text
+        retweetCount = tweet.retweetCount
+        favorited = tweet.favorited
+        favoriteCount = tweet.favoriteCount
+        createdAt = tweet.createdAt
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372606FD19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */; };
 		3743D5C919D7467A004D2AD1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743D5C819D7467A004D2AD1 /* SplashViewController.swift */; };
 		3743D5CB19D749B5004D2AD1 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743D5CA19D749B5004D2AD1 /* AuthViewController.swift */; };
 		3743D5CD19D74C89004D2AD1 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743D5CC19D74C89004D2AD1 /* TwitterClient.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweetViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3743D5C819D7467A004D2AD1 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		3743D5CA19D749B5004D2AD1 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		3743D5CC19D74C89004D2AD1 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				377EDD1319D424690024BF07 /* TweetTableViewCell.swift */,
 				377EDD0F19D41EAE0024BF07 /* TweetViewController.swift */,
 				377EDD0D19D415DC0024BF07 /* ComposeTweetViewController.swift */,
+				372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */,
 				377EDCF219D410D20024BF07 /* Images.xcassets */,
 				377EDCF419D410D20024BF07 /* LaunchScreen.xib */,
 				377EDCE919D410D20024BF07 /* Supporting Files */,
@@ -307,6 +310,7 @@
 			files = (
 				37CA0D8519D95B690073EE4D /* Application.swift in Sources */,
 				3743D5CD19D74C89004D2AD1 /* TwitterClient.swift in Sources */,
+				372606FD19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift in Sources */,
 				377EDD1019D41EAE0024BF07 /* TweetViewController.swift in Sources */,
 				377EDD0E19D415DC0024BF07 /* ComposeTweetViewController.swift in Sources */,
 				37CA0D7F19D8BBE00073EE4D /* Tweet.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate {
 
     @IBOutlet weak var tweetsTableView: UITableView!
     var refreshControl: UIRefreshControl?
@@ -18,6 +18,13 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     private var selectedTweet: Tweet?
     
     private var twitterClient = TwitterClient.sharedInstance
+    
+    var user: User {
+        get {
+            var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            return appDelegate.applicationModel.signedInUser!
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +41,7 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     func reloadTweets() {
         if let lastTweet = tweets?.first {
-            twitterClient.homeTimelineAfterTweetWithId(lastTweet.id) { (tweets, error) in
+            twitterClient.homeTimelineAfterTweetWithId(lastTweet.id!) { (tweets, error) in
                 if (tweets != nil) {
                     for tweet in tweets.reverse() {
                         self.tweets?.insert(tweet, atIndex: 0)
@@ -77,6 +84,21 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         return UITableViewAutomaticDimension
     }
     
+    // MARK: - Compose Delegate Shiznizz
+    func composeTweetViewControllerDidTweet(message: String, isRetweet: Bool, isReply: Bool) {
+        if (!isReply || !isRetweet) {
+            var pendingTweet = Tweet(values: ["text": message, "user": user])
+            tweets?.insert(pendingTweet, atIndex: 0)
+            tweetsTableView.reloadData()
+            
+            pendingTweet.save(twitterClient) { (error) in
+                if (error != nil) {
+                    println("error saving tweet")
+                }
+            }
+        }
+    }
+    
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
@@ -84,6 +106,10 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         if (segue.identifier == "HomeTimelineToTweet") {
             var tweetViewController = segue.destinationViewController as TweetViewController
             tweetViewController.tweet = selectedTweet
+        } else if (segue.identifier == "HomeTimelineToCompose") {
+            var navigationController = segue.destinationViewController as UINavigationController
+            var composeTweetController = navigationController.childViewControllers[0] as ComposeTweetViewController
+            composeTweetController.delegate = self
         }
     }
 }

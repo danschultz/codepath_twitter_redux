@@ -26,9 +26,16 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     }
     
     var initialMessage: String?
+    var isReply: Bool?
+    var isRetweet: Bool?
+    var delegate: ComposeTweetViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.opaque = false
+        
         updateControls()
         
         messageField.delegate = self
@@ -38,15 +45,17 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     private func updateControls() {
         profileImage.setImageWithURL(user.profileImageUrl)
         nameLabel.text = user.name
-        screenNameLabel.text = user.screenName
+        screenNameLabel.text = "@\(user.screenName)"
         messageField.text = initialMessage != nil ? initialMessage : ""
         
         updateInputtedText()
     }
     
     private func updateInputtedText() {
+        var charCount = countElements(messageField.text)
         messagePlaceholder.hidden = messageField.hasText()
-        remainingCharsLabel.text = "\(160 - countElements(messageField.text))"
+        remainingCharsLabel.text = "\(140 - charCount)"
+        postButton.enabled = charCount > 0 && charCount <= 140
     }
     
     // MARK: - Text view delegate methods
@@ -55,7 +64,13 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     }
     
     // MARK: - Actions
-    @IBAction func handleCancel(sender: AnyObject) {
+    @IBAction func handleCancelTap(sender: AnyObject) {
+        delegate.composeTweetViewControllerDidCancel?()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func handleTweetTap(sender: AnyObject) {
+        delegate.composeTweetViewControllerDidTweet(messageField.text, isRetweet: isRetweet ?? false, isReply: isReply ?? false)
         dismissViewControllerAnimated(true, completion: nil)
     }
 

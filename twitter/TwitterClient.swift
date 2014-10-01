@@ -52,4 +52,43 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 handler(nil, error)
         })
     }
+    
+    func updateStatus(status: String, inReplyToStatusId: Int?, handler: ((Tweet!, NSError!) -> Void)!) {
+        var params = ["status": status] as [NSString: AnyObject]
+        
+        if let suppliedInReplyToStatusId = inReplyToStatusId {
+            params["in_reply_to_status_id"] = suppliedInReplyToStatusId
+        }
+        
+        POST("1.1/statuses/update.json", parameters: params,
+            success: { (operation, data) in
+                var tweet = Tweet(values: data as NSDictionary)
+                handler(tweet, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+        })
+    }
+    
+    func favoriteTweetWithId(id: Int, handler: ((Tweet!, NSError!) -> Void)!) {
+        POST("1.1/favorites/create.json", parameters: ["id": id],
+            success: { (operation, data) in
+                var tweet = Tweet(values: data as NSDictionary)
+                handler(tweet, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+        })
+    }
+    
+    func unfavoriteTweetWithId(id: Int, handler: ((Tweet!, NSError!) -> Void)!) {
+        POST("1.1/favorites/destroy.json", parameters: ["id": id],
+            success: { (operation, data) in
+                var tweet = Tweet(values: data as NSDictionary)
+                handler(tweet, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+        })
+    }
 }
