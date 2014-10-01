@@ -19,10 +19,18 @@ class TweetViewController: UIViewController, ComposeTweetViewControllerDelegate 
     @IBOutlet weak var favoriteCountLabel: UILabel!
     
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
     
     var tweet: Tweet!
     
     var twitterClient = TwitterClient.sharedInstance
+    
+    var user: User {
+        get {
+            var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            return appDelegate.applicationModel.signedInUser!
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +44,14 @@ class TweetViewController: UIViewController, ComposeTweetViewControllerDelegate 
         messageLabel.text = tweet.text
         retweetCountLabel.text = "\(tweet.retweetCount)"
         favoriteCountLabel.text = "\(tweet.favoriteCount)"
+        retweetButton.enabled = tweet.user.screenName != user.screenName
         
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "M/dd/yyyy h:mm a"
         dateLabel.text = dateFormatter.stringFromDate(tweet.createdAt)
         
         updateFavoriteButton(tweet.favorited)
+        updateRetweetButton(tweet.retweeted)
     }
     
     private func updateFavoriteButton(value: Bool) {
@@ -49,8 +59,9 @@ class TweetViewController: UIViewController, ComposeTweetViewControllerDelegate 
         favoriteButton.setImage(image, forState: UIControlState.Normal)
     }
     
-    private func favoriteButtonImageForValue(value: Bool) -> UIImage {
-        return UIImage(named: value ? "Favorited" : "Favorite")
+    private func updateRetweetButton(value: Bool) {
+        var image = UIImage(named: value ? "Retweeted" : "Retweet")
+        retweetButton.setImage(image, forState: UIControlState.Normal)
     }
     
     // - MARK: Actions
@@ -69,7 +80,13 @@ class TweetViewController: UIViewController, ComposeTweetViewControllerDelegate 
     }
     
     @IBAction func handleRetweetTap(sender: AnyObject) {
-        
+        tweet.retweet(twitterClient) { (tweet, error) in
+            if (error == nil) {
+                self.updateControls()
+            } else {
+                println("error retweeting tweet")
+            }
+        }
     }
     
     // - MARK: Compose delegate

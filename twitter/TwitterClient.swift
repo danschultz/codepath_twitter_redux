@@ -91,4 +91,15 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 handler(nil, error)
         })
     }
+    
+    func retweetTweetWithId(id: Int, handler: ((Tweet!, NSError!) -> Void)!) {
+        POST("1.1/statuses/retweet/\(id).json", parameters: nil,
+            success: { (operation, data) in
+                var tweet = Tweet(values: data as NSDictionary)
+                handler(tweet, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+        })
+    }
 }

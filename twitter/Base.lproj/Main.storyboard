@@ -391,6 +391,7 @@
                         <outlet property="messageLabel" destination="t7V-Y7-6N7" id="PoI-CV-dcO"/>
                         <outlet property="nameLabel" destination="Sh0-N2-cpJ" id="1IT-WU-xDd"/>
                         <outlet property="profileImage" destination="xoZ-3x-tD9" id="yon-fD-eVX"/>
+                        <outlet property="retweetButton" destination="pVf-fh-XVv" id="oN0-AS-cu8"/>
                         <outlet property="retweetCountLabel" destination="4QZ-9L-PHq" id="wO9-VS-dQZ"/>
                         <outlet property="screenNameLabel" destination="Vqk-Rx-7yS" id="TXe-w1-7vF"/>
                     </connections>

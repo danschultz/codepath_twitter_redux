@@ -14,8 +14,9 @@ class Tweet: NSObject {
     var text: String!
     var createdAt: NSDate!
     var favorited: Bool!
-    var retweetCount: Int!
     var favoriteCount: Int!
+    var retweeted: Bool!
+    var retweetCount: Int!
     
     var hasFavorites: Bool! {
         get {
@@ -51,8 +52,9 @@ class Tweet: NSObject {
         // Optional fields
         id = values["id"] as? Int
         favorited = values["favorited"] as? Bool
-        retweetCount = values["retweet_count"] as? Int
         favoriteCount = values["favorite_count"] as? Int
+        retweeted = values["retweeted"] as? Bool
+        retweetCount = values["retweet_count"] as? Int
     }
     
     func toggleFavorite(client: TwitterClient, handler: (error: NSError!) -> Void) {
@@ -94,10 +96,23 @@ class Tweet: NSObject {
         }
     }
     
+    func retweet(client: TwitterClient, handler: (Tweet!, NSError!) -> Void) {
+        assert(id != nil, "retweeting an unsaved tweet is not supported yet")
+        
+        client.retweetTweetWithId(id!) { (tweet, error) in
+            if (error == nil) {
+                self.retweeted = true
+                self.retweetCount = self.retweetCount + 1
+            }
+            handler(tweet, error)
+        }
+    }
+    
     private func copyValuesFromTweet(tweet: Tweet) {
         id = tweet.id
         user = tweet.user
         text = tweet.text
+        retweeted = tweet.retweeted
         retweetCount = tweet.retweetCount
         favorited = tweet.favorited
         favoriteCount = tweet.favoriteCount
