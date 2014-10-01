@@ -18,6 +18,12 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var headerTextColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barTintColor = UIColor(red: 46 / 255, green: 154 / 255, blue: 234, alpha: 1.0)
+        navigationController?.navigationBar.tintColor = headerTextColor
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName : headerTextColor
+        ]
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         // If the user has already logged in, then load the newest tweets and go to the home timeline view
