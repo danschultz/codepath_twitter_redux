@@ -10,27 +10,27 @@ import UIKit
 
 class Tweet: NSObject {
     var id: Int?
-    var user: User!
-    var text: String!
-    var createdAt: NSDate!
-    var favorited: Bool!
-    var favoriteCount: Int!
-    var retweeted: Bool!
-    var retweetCount: Int!
+    var user: User
+    var text: String
+    var createdAt: NSDate
+    var favorited: Bool
+    var favoriteCount: Int
+    var retweeted: Bool
+    var retweetCount: Int
     
-    var hasFavorites: Bool! {
+    var hasFavorites: Bool {
         get {
             return favoriteCount > 0
         }
     }
     
-    var hasRetweets: Bool! {
+    var hasRetweets: Bool {
         get {
             return retweetCount > 0
         }
     }
     
-    var timeAgo: String! {
+    var timeAgo: String {
         get {
             return createdAt.timeAgo()
         }
@@ -49,12 +49,13 @@ class Tweet: NSObject {
             createdAt = NSDate()
         }
         
+        favorited = values["favorited"] != nil ? values["favorited"] as Bool : false
+        favoriteCount = values["favorite_count"] != nil ? values["favorite_count"] as Int : 0
+        retweeted = values["retweeted"] != nil ? values["retweeted"] as Bool : false
+        retweetCount = values["retweet_count"] != nil ? values["retweet_count"] as Int : 0
+        
         // Optional fields
         id = values["id"] as? Int
-        favorited = values["favorited"] as? Bool
-        favoriteCount = values["favorite_count"] as? Int
-        retweeted = values["retweeted"] as? Bool
-        retweetCount = values["retweet_count"] as? Int
     }
     
     func toggleFavorite(client: TwitterClient, handler: (error: NSError!) -> Void) {

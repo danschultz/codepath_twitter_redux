@@ -16,8 +16,16 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
-    var _tweet: Tweet?
-    var tweet: Tweet? {
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    
+    var twitterClient = TwitterClient.sharedInstance
+    
+    var _tweet: Tweet!
+    var tweet: Tweet! {
         get {
             return _tweet
         }
@@ -27,22 +35,69 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
     
+    var user: User {
+        get {
+            var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            return appDelegate.applicationModel.signedInUser!
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        messageLabel.preferredMaxLayoutWidth = 280;
     }
     
     private func updateControls() {
-        nameLabel.text = tweet!.user.name
-        screenNameLabel.text = "@\(tweet!.user.screenName)"
-        messageLabel.text = tweet!.text
-        profileImage.setImageWithURL(tweet!.user.profileImageUrl)
-        timeLabel.text = tweet!.timeAgo
+        nameLabel.text = tweet.user.name
+        screenNameLabel.text = "@\(tweet.user.screenName)"
+        messageLabel.text = tweet.text
+        profileImage.setImageWithURL(tweet.user.profileImageUrl)
+        timeLabel.text = tweet.timeAgo
+        
+        retweetButton.enabled = tweet.user.screenName != user.screenName
+        updateRetweetButton(tweet.retweeted)
+        if (tweet.hasRetweets) {
+            retweetCountLabel.text = "\(tweet.retweetCount)"
+        } else {
+            retweetCountLabel.text = ""
+        }
+        
+        updateFavoriteButton(tweet.favorited)
+        if (tweet.hasFavorites) {
+            favoriteCountLabel.text = "\(tweet.favoriteCount)"
+        } else {
+            favoriteCountLabel.text = ""
+        }
     }
-
+    
+    private func updateFavoriteButton(value: Bool) {
+        var image = UIImage(named: value ? "Favorited" : "Favorite")
+        favoriteButton.setImage(image, forState: UIControlState.Normal)
+    }
+    
+    private func updateRetweetButton(value: Bool) {
+        var image = UIImage(named: value ? "Retweeted" : "Retweet")
+        retweetButton.setImage(image, forState: UIControlState.Normal)
+    }
+    
+    // - MARK: Actions
+    @IBAction func handleFavoriteTap(sender: AnyObject) {
+        tweet.toggleFavorite(twitterClient) { (error) in
+            if (error == nil) {
+                self.updateControls()
+            } else {
+                println("error favoriting tweet")
+            }
+        }
+    }
+    
+    @IBAction func handleRetweetTap(sender: AnyObject) {
+        tweet.retweet(twitterClient) { (tweet, error) in
+            if (error == nil) {
+                self.updateControls()
+            } else {
+                println("error retweeting tweet")
+            }
+        }
+    }
 }

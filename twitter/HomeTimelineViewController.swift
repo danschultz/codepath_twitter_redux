@@ -8,11 +8,8 @@
 
 import UIKit
 
-class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate {
+class HomeTimelineViewController: UITableViewController, ComposeTweetViewControllerDelegate {
 
-    @IBOutlet weak var tweetsTableView: UITableView!
-    var refreshControl: UIRefreshControl?
-    
     var tweets: [Tweet]?
     
     private var selectedTweet: Tweet?
@@ -29,12 +26,11 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tweetsTableView.rowHeight = UITableViewAutomaticDimension
-        tweetsTableView.dataSource = self
-        tweetsTableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.dataSource = self
+        tableView.delegate = self
         
         var refreshControl = UIRefreshControl()
-        tweetsTableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: "handleRefreshRequest:", forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
     }
@@ -47,7 +43,7 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
                         self.tweets?.insert(tweet, atIndex: 0)
                     }
                     
-                    self.tweetsTableView.reloadData()
+                    self.tableView.reloadData()
                 }
                 
                 self.refreshControl?.endRefreshing()
@@ -61,11 +57,11 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     // MARK: - Table View Shiz
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets != nil ? tweets!.count : 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as TweetTableViewCell
         if let loadedTweets = tweets {
             cell.tweet = loadedTweets[indexPath.row]
@@ -73,14 +69,14 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let loadedTweets = tweets {
             selectedTweet = loadedTweets[indexPath.row]
             performSegueWithIdentifier("HomeTimelineToTweet", sender: self)
         }
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
@@ -89,7 +85,7 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         if (!isReply || !isRetweet) {
             var pendingTweet = Tweet(values: ["text": message, "user": user])
             tweets?.insert(pendingTweet, atIndex: 0)
-            tweetsTableView.reloadData()
+            tableView.reloadData()
             
             pendingTweet.save(twitterClient) { (error) in
                 if (error != nil) {
