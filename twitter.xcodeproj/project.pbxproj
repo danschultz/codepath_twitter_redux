@@ -21,6 +21,12 @@
 		377EDD0E19D415DC0024BF07 /* ComposeTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EDD0D19D415DC0024BF07 /* ComposeTweetViewController.swift */; };
 		377EDD1019D41EAE0024BF07 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EDD0F19D41EAE0024BF07 /* TweetViewController.swift */; };
 		377EDD1419D424690024BF07 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EDD1319D424690024BF07 /* TweetTableViewCell.swift */; };
+		378C80FE19E0A5F800D05270 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C80FD19E0A5F800D05270 /* MainViewController.swift */; };
+		378C810019E0A7F500D05270 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C80FF19E0A7F500D05270 /* SlideMenuViewController.swift */; };
+		378C810219E0ACF000D05270 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C810119E0ACF000D05270 /* MenuViewController.swift */; };
+		378C810519E1228300D05270 /* MenuProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C810419E1228300D05270 /* MenuProfileTableViewCell.swift */; };
+		378C810719E122B600D05270 /* MenuItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C810619E122B600D05270 /* MenuItemTableViewCell.swift */; };
+		378C810919E125AA00D05270 /* MenuViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C810819E125AA00D05270 /* MenuViewControllerDelegate.swift */; };
 		37CA0D7F19D8BBE00073EE4D /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA0D7E19D8BBE00073EE4D /* Tweet.swift */; };
 		37CA0D8119D8BC0F0073EE4D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA0D8019D8BC0F0073EE4D /* User.swift */; };
 		37CA0D8319D93DB80073EE4D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CA0D8219D93DB80073EE4D /* Settings.swift */; };
@@ -58,6 +64,12 @@
 		377EDD0D19D415DC0024BF07 /* ComposeTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweetViewController.swift; sourceTree = "<group>"; };
 		377EDD0F19D41EAE0024BF07 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		377EDD1319D424690024BF07 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		378C80FD19E0A5F800D05270 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		378C80FF19E0A7F500D05270 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
+		378C810119E0ACF000D05270 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		378C810419E1228300D05270 /* MenuProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuProfileTableViewCell.swift; sourceTree = "<group>"; };
+		378C810619E122B600D05270 /* MenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemTableViewCell.swift; sourceTree = "<group>"; };
+		378C810819E125AA00D05270 /* MenuViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewControllerDelegate.swift; sourceTree = "<group>"; };
 		37CA0D7E19D8BBE00073EE4D /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		37CA0D8019D8BC0F0073EE4D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		37CA0D8219D93DB80073EE4D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -109,22 +121,28 @@
 		377EDCE819D410D20024BF07 /* twitter */ = {
 			isa = PBXGroup;
 			children = (
-				37CA0D7B19D8BBA00073EE4D /* Models */,
-				3743D5CE19D791B9004D2AD1 /* twitter-Bridging-Header.h */,
 				377EDCEB19D410D20024BF07 /* AppDelegate.swift */,
 				3743D5CA19D749B5004D2AD1 /* AuthViewController.swift */,
-				377EDCED19D410D20024BF07 /* HomeTimelineViewController.swift */,
-				377EDCEF19D410D20024BF07 /* Main.storyboard */,
-				377EDD1319D424690024BF07 /* TweetTableViewCell.swift */,
-				377EDD0F19D41EAE0024BF07 /* TweetViewController.swift */,
 				377EDD0D19D415DC0024BF07 /* ComposeTweetViewController.swift */,
 				372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */,
+				377EDCED19D410D20024BF07 /* HomeTimelineViewController.swift */,
 				377EDCF219D410D20024BF07 /* Images.xcassets */,
 				377EDCF419D410D20024BF07 /* LaunchScreen.xib */,
-				377EDCE919D410D20024BF07 /* Supporting Files */,
-				3743D5C819D7467A004D2AD1 /* SplashViewController.swift */,
-				3743D5CC19D74C89004D2AD1 /* TwitterClient.swift */,
+				377EDCEF19D410D20024BF07 /* Main.storyboard */,
+				378C80FD19E0A5F800D05270 /* MainViewController.swift */,
+				378C810619E122B600D05270 /* MenuItemTableViewCell.swift */,
+				378C810419E1228300D05270 /* MenuProfileTableViewCell.swift */,
+				378C810119E0ACF000D05270 /* MenuViewController.swift */,
+				378C810819E125AA00D05270 /* MenuViewControllerDelegate.swift */,
+				37CA0D7B19D8BBA00073EE4D /* Models */,
 				37CA0D8219D93DB80073EE4D /* Settings.swift */,
+				378C80FF19E0A7F500D05270 /* SlideMenuViewController.swift */,
+				3743D5C819D7467A004D2AD1 /* SplashViewController.swift */,
+				377EDCE919D410D20024BF07 /* Supporting Files */,
+				377EDD1319D424690024BF07 /* TweetTableViewCell.swift */,
+				377EDD0F19D41EAE0024BF07 /* TweetViewController.swift */,
+				3743D5CE19D791B9004D2AD1 /* twitter-Bridging-Header.h */,
+				3743D5CC19D74C89004D2AD1 /* TwitterClient.swift */,
 			);
 			path = twitter;
 			sourceTree = "<group>";
@@ -311,12 +329,18 @@
 				37CA0D8519D95B690073EE4D /* Application.swift in Sources */,
 				3743D5CD19D74C89004D2AD1 /* TwitterClient.swift in Sources */,
 				372606FD19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift in Sources */,
+				378C810719E122B600D05270 /* MenuItemTableViewCell.swift in Sources */,
 				377EDD1019D41EAE0024BF07 /* TweetViewController.swift in Sources */,
 				377EDD0E19D415DC0024BF07 /* ComposeTweetViewController.swift in Sources */,
 				37CA0D7F19D8BBE00073EE4D /* Tweet.swift in Sources */,
 				377EDCEE19D410D20024BF07 /* HomeTimelineViewController.swift in Sources */,
+				378C810219E0ACF000D05270 /* MenuViewController.swift in Sources */,
+				378C80FE19E0A5F800D05270 /* MainViewController.swift in Sources */,
 				3743D5CB19D749B5004D2AD1 /* AuthViewController.swift in Sources */,
+				378C810519E1228300D05270 /* MenuProfileTableViewCell.swift in Sources */,
 				3743D5C919D7467A004D2AD1 /* SplashViewController.swift in Sources */,
+				378C810019E0A7F500D05270 /* SlideMenuViewController.swift in Sources */,
+				378C810919E125AA00D05270 /* MenuViewControllerDelegate.swift in Sources */,
 				377EDD1419D424690024BF07 /* TweetTableViewCell.swift in Sources */,
 				37CA0D8119D8BC0F0073EE4D /* User.swift in Sources */,
 				37CA0D8319D93DB80073EE4D /* Settings.swift in Sources */,

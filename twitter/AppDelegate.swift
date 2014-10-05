@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
         
         // Finish the auth process and close the auth view.
-        var navigationController = self.window?.rootViewController as UINavigationController
-        var splashViewController = navigationController.childViewControllers[0] as SplashViewController
+//        var navigationController = self.window?.rootViewController as UINavigationController
+        var splashViewController = self.window?.rootViewController as SplashViewController
         splashViewController.finishAuthorizationWithParamsFromUrl(url)
         
         return true

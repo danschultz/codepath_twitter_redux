@@ -10,10 +10,9 @@ import UIKit
 
 class SplashViewController: UIViewController {
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var twitterClient = TwitterClient.sharedInstance
     var settings = Settings.sharedInstance
-    
-    var initialTweets: [Tweet]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,18 +50,15 @@ class SplashViewController: UIViewController {
         twitterClient.requestSerializer.saveAccessToken(accessToken)
         presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
         
-        loadSignedInUser() { _ in
-            self.twitterClient.homeTimeline() { (tweets, error) in
-                if (tweets != nil) {
-                    self.showTimelineView(tweets)
-                }
+        loadSignedInUser() { (user) in
+            user.reloadTimeline(self.twitterClient) { (tweets, error) in
+                self.showMainView()
             }
         }
     }
     
-    private func showTimelineView(tweets: [Tweet]) {
-        initialTweets = tweets
-        performSegueWithIdentifier("SplashToHomeTimeline", sender: self)
+    private func showMainView() {
+        performSegueWithIdentifier("SplashToMain", sender: self)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -73,8 +69,7 @@ class SplashViewController: UIViewController {
     
     func loadSignedInUser(handler: (User!) -> Void) {
         twitterClient.verifyAccountCredentials() { (user, error) in
-            var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            appDelegate.applicationModel.signedInUser = user
+            self.appDelegate.applicationModel.signedInUser = user
             handler(user)
         }
     }
@@ -93,10 +88,10 @@ class SplashViewController: UIViewController {
         var tempSender = sender as? UIViewController
         
         if (tempSender == self) {
-            if (segue.identifier == "SplashToHomeTimeline") {
-                var navigationController = segue.destinationViewController as UINavigationController
-                var timelineViewController = navigationController.childViewControllers[0] as HomeTimelineViewController
-                timelineViewController.tweets = initialTweets
+            if (segue.identifier == "SplashToMain") {
+//                var navigationController = segue.destinationViewController as UINavigationController
+//                var timelineViewController = navigationController.childViewControllers[0] as HomeTimelineViewController
+//                timelineViewController.tweets = initialTweets
             }
         }
     }

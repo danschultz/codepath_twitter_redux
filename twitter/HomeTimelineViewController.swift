@@ -10,21 +10,23 @@ import UIKit
 
 class HomeTimelineViewController: UITableViewController, ComposeTweetViewControllerDelegate {
 
-    var tweets: [Tweet]?
+    var tweets: [Tweet]!
     
     private var selectedTweet: Tweet?
     
     private var twitterClient = TwitterClient.sharedInstance
     
-    var user: User {
+    var applicationModel: Application {
         get {
             var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            return appDelegate.applicationModel.signedInUser!
+            return appDelegate.applicationModel
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tweets = applicationModel.signedInUser?.timeline
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
@@ -83,7 +85,7 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
     // MARK: - Compose Delegate Shiznizz
     func composeTweetViewControllerDidTweet(message: String, isRetweet: Bool, isReply: Bool) {
         if (!isReply || !isRetweet) {
-            var pendingTweet = Tweet(values: ["text": message, "user": user])
+            var pendingTweet = Tweet(values: ["text": message, "user": applicationModel.signedInUser!])
             tweets?.insert(pendingTweet, atIndex: 0)
             tableView.reloadData()
             
