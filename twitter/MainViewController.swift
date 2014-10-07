@@ -19,6 +19,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate {
         
         var menuNavigationController = storyboard?.instantiateViewControllerWithIdentifier("MenuNavigationController") as UINavigationController
         var menuViewController = menuNavigationController.viewControllers[0] as MenuViewController
+        menuViewController.user = application.signedInUser
         menuViewController.delegate = self
         
         slideMenuViewController = storyboard?.instantiateViewControllerWithIdentifier("SlideMenuViewController") as SlideMenuViewController

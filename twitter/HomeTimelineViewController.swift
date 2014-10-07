@@ -26,6 +26,8 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarToTwitterPrimaryColors()
+        
         tweets = applicationModel.signedInUser?.timeline
         
         tableView.rowHeight = UITableViewAutomaticDimension

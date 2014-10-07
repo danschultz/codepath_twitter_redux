@@ -18,7 +18,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
         var headerTextColor = UIColor.whiteColor()
-        navigationController?.navigationBar.barTintColor = UIColor(red: 46 / 255, green: 154 / 255, blue: 234, alpha: 1.0)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 85 / 255, green: 172 / 255, blue: 238, alpha: 1.0)
         navigationController?.navigationBar.tintColor = headerTextColor
         navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName : headerTextColor

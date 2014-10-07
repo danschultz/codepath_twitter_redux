@@ -53,8 +53,6 @@ class SlideMenuViewController: UIViewController {
     @IBOutlet weak var menuContainerView: UIView!
     @IBOutlet weak var mainViewContainer: UIView!
     
-    var isMenuOpen: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,33 +65,48 @@ class SlideMenuViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        mainViewContainer.layer.shadowColor = UIColor.blackColor().CGColor
+        mainViewContainer.layer.shadowOpacity = 0.7
+        mainViewContainer.layer.shadowRadius = 4.0;
+        mainViewContainer.layer.shadowOffset = CGSizeMake(0, 0)
+        mainViewContainer.layer.shadowPath = UIBezierPath(rect: mainViewContainer.frame).CGPath
+        mainViewContainer.clipsToBounds = false
+    }
+    
     // MARK: - Public API methods
     func openMenu() {
-        if (!isMenuOpen) {
-            UIView.animateWithDuration(0.4, animations: { () -> Void in
-                self.mainViewContainer.frame.origin.x = self.view.frame.width - 50
-            })
-            
-            isMenuOpen = true
-        }
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.mainViewContainer.frame.origin.x = self.view.frame.width - 50
+        })
     }
     
     func closeMenu() {
         UIView.animateWithDuration(0.4, animations: { () -> Void in
             self.mainViewContainer.frame.origin.x = 0
         })
-        
-        isMenuOpen = false
     }
     
     // MARK: - Actions
+    var mainViewContainerPanStartX = CGFloat(0)
+    var isPeeking = false
     @IBAction func handlePan(sender: UIPanGestureRecognizer) {
-        if (sender.state == UIGestureRecognizerState.Changed) {
+        if (sender.state == UIGestureRecognizerState.Began) {
+            mainViewContainerPanStartX = mainViewContainer.frame.origin.x
+            isPeeking = sender.locationInView(view).x < view.center.x
+        }
+        
+        if (sender.state == UIGestureRecognizerState.Changed && isPeeking) {
             peekAtMenu(sender.translationInView(view).x)
         }
         
         if (sender.state == UIGestureRecognizerState.Ended) {
-            peekAtMenuTouchEnd(atTouchPosition: sender.locationInView(view))
+            if (isPeeking) {
+                peekAtMenuTouchEnd(atTouchPosition: sender.locationInView(view))
+            }
+            isPeeking = false
         }
     }
     
@@ -126,7 +139,10 @@ class SlideMenuViewController: UIViewController {
     }
     
     private func peekAtMenu(width: CGFloat) {
-        mainViewContainer.frame.origin.x = width
+        var x = mainViewContainerPanStartX + width
+        var maxX = view.frame.width - 50
+        
+        mainViewContainer.frame.origin.x = x <= maxX ? x : maxX
     }
     
     private func peekAtMenuTouchEnd(atTouchPosition touchPosition: CGPoint) {

@@ -20,8 +20,8 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarToTwitterPrimaryColors()
         tableView.rowHeight = UITableViewAutomaticDimension
-        
         updateControls()
     }
 
