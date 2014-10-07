@@ -24,7 +24,7 @@ class SlideMenuViewController: UIViewController {
             
             if let newViewController = newValue {
                 if (menuContainerView != nil) {
-                    addViewToContainer(menuContainerView, view: newViewController.view)
+                    addViewControllerToContainer(newViewController, container: menuContainerView)
                 }
             }
         }
@@ -44,7 +44,7 @@ class SlideMenuViewController: UIViewController {
             
             if let newViewController = newValue {
                 if (mainViewContainer != nil) {
-                    addViewToContainer(mainViewContainer, view: newViewController.view)
+                    addViewControllerToContainer(newViewController, container: mainViewContainer)
                 }
             }
         }
@@ -52,17 +52,20 @@ class SlideMenuViewController: UIViewController {
     
     @IBOutlet weak var menuContainerView: UIView!
     @IBOutlet weak var mainViewContainer: UIView!
+    @IBOutlet var mainViewTapGestureRecognizer: UITapGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let suppliedMenuViewController = menuViewController {
-            addViewToContainer(menuContainerView, view: suppliedMenuViewController.view)
+            addViewControllerToContainer(suppliedMenuViewController, container: menuContainerView)
         }
         
-        if let suppliedMainViewController = menuViewController {
-            addViewToContainer(mainViewContainer, view: suppliedMainViewController.view)
+        if let suppliedMainViewController = mainViewController {
+            addViewControllerToContainer(suppliedMainViewController, container: mainViewContainer)
         }
+        
+        closeMenu()
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,12 +84,14 @@ class SlideMenuViewController: UIViewController {
         UIView.animateWithDuration(0.4, animations: { () -> Void in
             self.mainViewContainer.frame.origin.x = self.view.frame.width - 50
         })
+        mainViewTapGestureRecognizer.enabled = true
     }
     
     func closeMenu() {
         UIView.animateWithDuration(0.4, animations: { () -> Void in
             self.mainViewContainer.frame.origin.x = 0
         })
+        mainViewTapGestureRecognizer.enabled = false
     }
     
     // MARK: - Actions
@@ -117,8 +122,11 @@ class SlideMenuViewController: UIViewController {
     // MARK: - Private methods
     private func addViewControllerToContainer(viewController: UIViewController, container: UIView) {
         addChildViewController(viewController)
-        view.frame = container.frame
-        container.addSubview(view)
+        
+        viewController.view.frame = container.frame
+        viewController.view.frame.origin.x = 0
+        
+        container.addSubview(viewController.view)
         viewController.didMoveToParentViewController(self)
     }
     
@@ -126,16 +134,6 @@ class SlideMenuViewController: UIViewController {
         viewController.willMoveToParentViewController(nil)
         viewController.view.removeFromSuperview()
         viewController.removeFromParentViewController()
-    }
-    
-    private func addViewToContainer(container: UIView, view: UIView) {
-        view.frame = container.frame
-        
-        for child in container.subviews {
-            child.removeFromSuperview()
-        }
-        
-        container.addSubview(view)
     }
     
     private func peekAtMenu(width: CGFloat) {

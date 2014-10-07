@@ -27,8 +27,8 @@ class MainViewController: UIViewController, MenuViewControllerDelegate {
         addChildViewController(slideMenuViewController)
         
         slideMenuViewController.menuViewController = menuNavigationController
-//        showTimelineView()
-        showProfileView()
+        showTimelineView()
+//        showProfileView()
     }
     
     private func showTimelineView() {

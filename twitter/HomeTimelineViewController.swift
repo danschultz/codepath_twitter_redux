@@ -84,6 +84,7 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
         return UITableViewAutomaticDimension
     }
     
+    
     // MARK: - Compose Delegate Shiznizz
     func composeTweetViewControllerDidTweet(message: String, isRetweet: Bool, isReply: Bool) {
         if (!isReply || !isRetweet) {

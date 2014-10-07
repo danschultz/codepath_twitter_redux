@@ -459,6 +459,7 @@
                     </view>
                     <connections>
                         <outlet property="mainViewContainer" destination="xiF-Wo-g73" id="xhC-Ut-TMx"/>
+                        <outlet property="mainViewTapGestureRecognizer" destination="6Ni-9S-2MP" id="lSi-ZP-I7n"/>
                         <outlet property="menuContainerView" destination="aDN-sp-1tw" id="rKY-UR-zf6"/>
                     </connections>
                 </viewController>
@@ -798,7 +799,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GoC-Xd-oa8" id="dL9-r5-XXa">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKM-nZ-5CA">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKM-nZ-5CA">
                                             <rect key="frame" x="16" y="16" width="48" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="48" id="3EI-na-dMF"/>
