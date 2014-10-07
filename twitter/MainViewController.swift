@@ -28,7 +28,6 @@ class MainViewController: UIViewController, MenuViewControllerDelegate {
         
         slideMenuViewController.menuViewController = menuNavigationController
         showTimelineView()
-//        showProfileView()
     }
     
     private func showTimelineView() {
@@ -40,6 +39,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate {
     private func showProfileView() {
         var profileNavigationController = storyboard?.instantiateViewControllerWithIdentifier("ProfileNavigationController") as UINavigationController
         var profileViewController = profileNavigationController.viewControllers[0] as ProfileViewController
+        profileViewController.applicationModel = application
         profileViewController.user = application.signedInUser
         slideMenuViewController.mainViewController = profileNavigationController
     }

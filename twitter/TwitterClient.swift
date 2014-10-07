@@ -42,6 +42,18 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             })
     }
     
+    func userTimeline(screenName: String, handler: (([Tweet]!, NSError!) -> Void)!) {
+        GET("1.1/statuses/user_timeline.json", parameters: ["screen_name": screenName],
+            success: { (operation, data) in
+                var tweets = data as [NSDictionary]
+                var parsedTweets = tweets.map({ Tweet(values: $0) })
+                handler(parsedTweets, nil)
+            },
+            failure: { (operation, error) in
+                handler(nil, error)
+        })
+    }
+    
     func verifyAccountCredentials(handler: ((User!, NSError!) -> Void)!) {
         GET("1.1/account/verify_credentials.json", parameters: nil,
             success: { (operation, data) in

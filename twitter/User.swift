@@ -18,6 +18,9 @@ class User: NSObject {
     var friendsCount: Int
     var statusesCount: Int
     
+    var userTimeline: [Tweet]?
+    
+    // TODO(Dan): need to rename to home timeline
     var timeline: [Tweet]
     
     init(values: NSDictionary) {
@@ -41,6 +44,15 @@ class User: NSObject {
             if (error == nil) {
                 self.timeline.removeAll(keepCapacity: false)
                 self.timeline += tweets
+            }
+            handler(tweets, error)
+        }
+    }
+    
+    func reloadUserTimeline(client: TwitterClient, handler: ([Tweet]!, NSError!) -> Void) {
+        client.userTimeline(screenName) { (tweets, error) in
+            if (error == nil) {
+                self.userTimeline = tweets
             }
             handler(tweets, error)
         }

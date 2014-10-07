@@ -33,6 +33,7 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.registerNib(UINib(nibName: "TweetTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetTableViewCell")
         
         var refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "handleRefreshRequest:", forControlEvents: UIControlEvents.ValueChanged)
@@ -66,7 +67,7 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as TweetTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("TweetTableViewCell") as TweetTableViewCell
         cell.delegate = self
         if let loadedTweets = tweets {
             cell.tweet = loadedTweets[indexPath.row]
@@ -119,6 +120,7 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
             composeTweetController.delegate = self
         } else if (segue.identifier == "HomeTimelineToProfile") {
             var profileController = segue.destinationViewController as ProfileViewController
+            profileController.applicationModel = applicationModel
             profileController.user = sender as? User
         }
     }

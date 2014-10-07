@@ -26,9 +26,12 @@ class ProfileCounterTableViewCell: UITableViewCell {
     }
     
     private func updateControls() {
-        followersCountLabel.text = "\(user.followersCount)"
-        followingCountLabel.text = "\(user.friendsCount)"
-        tweetsCountLabel.text = "\(user.statusesCount)"
+        var numberFormatter = NSNumberFormatter()
+        numberFormatter.usesGroupingSeparator = true
+        
+        followersCountLabel.text = "\(numberFormatter.stringFromNumber(user.followersCount))"
+        followingCountLabel.text = "\(numberFormatter.stringFromNumber(user.friendsCount))"
+        tweetsCountLabel.text = "\(numberFormatter.stringFromNumber(user.statusesCount))"
     }
 
 }

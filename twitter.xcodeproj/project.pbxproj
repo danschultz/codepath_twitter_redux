@@ -13,6 +13,7 @@
 		3718C6D719E36F4D001EFAAF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718C6D619E36F4D001EFAAF /* Constants.swift */; };
 		3718C6D919E36FA0001EFAAF /* UINavigationController+Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718C6D819E36FA0001EFAAF /* UINavigationController+Twitter.swift */; };
 		3718C6DB19E3D3DB001EFAAF /* TweetTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718C6DA19E3D3DB001EFAAF /* TweetTableViewCellDelegate.swift */; };
+		3718C6DD19E3DDA7001EFAAF /* TweetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3718C6DC19E3DDA7001EFAAF /* TweetTableViewCell.xib */; };
 		372606FD19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */; };
 		3743D5C919D7467A004D2AD1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743D5C819D7467A004D2AD1 /* SplashViewController.swift */; };
 		3743D5CB19D749B5004D2AD1 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743D5CA19D749B5004D2AD1 /* AuthViewController.swift */; };
@@ -57,6 +58,7 @@
 		3718C6D619E36F4D001EFAAF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3718C6D819E36FA0001EFAAF /* UINavigationController+Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Twitter.swift"; sourceTree = "<group>"; };
 		3718C6DA19E3D3DB001EFAAF /* TweetTableViewCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCellDelegate.swift; sourceTree = "<group>"; };
+		3718C6DC19E3DDA7001EFAAF /* TweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetTableViewCell.xib; sourceTree = "<group>"; };
 		372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweetViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3743D5C819D7467A004D2AD1 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		3743D5CA19D749B5004D2AD1 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -134,10 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				377EDCEB19D410D20024BF07 /* AppDelegate.swift */,
+				3718C6DC19E3DDA7001EFAAF /* TweetTableViewCell.xib */,
 				3743D5CA19D749B5004D2AD1 /* AuthViewController.swift */,
 				377EDD0D19D415DC0024BF07 /* ComposeTweetViewController.swift */,
 				372606FC19DBC32000CAFCF1 /* ComposeTweetViewControllerDelegate.swift */,
-				3718C6DA19E3D3DB001EFAAF /* TweetTableViewCellDelegate.swift */,
 				3718C6D619E36F4D001EFAAF /* Constants.swift */,
 				377EDCED19D410D20024BF07 /* HomeTimelineViewController.swift */,
 				377EDCF219D410D20024BF07 /* Images.xcassets */,
@@ -157,6 +159,7 @@
 				3743D5C819D7467A004D2AD1 /* SplashViewController.swift */,
 				377EDCE919D410D20024BF07 /* Supporting Files */,
 				377EDD1319D424690024BF07 /* TweetTableViewCell.swift */,
+				3718C6DA19E3D3DB001EFAAF /* TweetTableViewCellDelegate.swift */,
 				377EDD0F19D41EAE0024BF07 /* TweetViewController.swift */,
 				3743D5CE19D791B9004D2AD1 /* twitter-Bridging-Header.h */,
 				3743D5CC19D74C89004D2AD1 /* TwitterClient.swift */,
@@ -290,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3718C6DD19E3DDA7001EFAAF /* TweetTableViewCell.xib in Resources */,
 				377EDCF119D410D20024BF07 /* Main.storyboard in Resources */,
 				377EDCF619D410D20024BF07 /* LaunchScreen.xib in Resources */,
 				377EDD0C19D4110A0024BF07 /* Podfile in Resources */,
