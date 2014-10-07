@@ -59,7 +59,7 @@ class SplashViewController: UIViewController {
     
     private func showMainView() {
         performSegueWithIdentifier("SplashToMain", sender: self)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+//        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func handleAccessTokenFailure(error: NSError!) {

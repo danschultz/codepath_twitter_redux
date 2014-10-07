@@ -22,6 +22,10 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     
+    var profileImageTapRecognizer: UITapGestureRecognizer!
+    
+    var delegate: TweetTableViewCellDelegate?
+    
     var twitterClient = TwitterClient.sharedInstance
     
     var _tweet: Tweet!
@@ -45,6 +49,10 @@ class TweetTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         messageLabel.preferredMaxLayoutWidth = 280;
+        
+        profileImageTapRecognizer = UITapGestureRecognizer(target: self, action: "handleProfileImageTap:")
+        profileImageTapRecognizer.numberOfTapsRequired = 1
+        profileImage.addGestureRecognizer(profileImageTapRecognizer)
     }
     
     private func updateControls() {
@@ -99,5 +107,9 @@ class TweetTableViewCell: UITableViewCell {
                 println("error retweeting tweet")
             }
         }
+    }
+    
+    func handleProfileImageTap(sender: AnyObject) {
+        delegate?.tweetTableViewCellDidTapProfileImage?(tweet.user)
     }
 }

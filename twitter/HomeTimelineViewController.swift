@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTimelineViewController: UITableViewController, ComposeTweetViewControllerDelegate {
+class HomeTimelineViewController: UITableViewController, ComposeTweetViewControllerDelegate, TweetTableViewCellDelegate {
 
     var tweets: [Tweet]!
     
@@ -60,13 +60,14 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
         reloadTweets()
     }
 
-    // MARK: - Table View Shiz
+    // MARK: - Table View delegate, datasource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets != nil ? tweets!.count : 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as TweetTableViewCell
+        cell.delegate = self
         if let loadedTweets = tweets {
             cell.tweet = loadedTweets[indexPath.row]
         }
@@ -100,6 +101,11 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
         }
     }
     
+    // MARK: - Tweet table view cell delegate
+    func tweetTableViewCellDidTapProfileImage(user: User) {
+        performSegueWithIdentifier("HomeTimelineToProfile", sender: user)
+    }
+    
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
@@ -111,6 +117,9 @@ class HomeTimelineViewController: UITableViewController, ComposeTweetViewControl
             var navigationController = segue.destinationViewController as UINavigationController
             var composeTweetController = navigationController.childViewControllers[0] as ComposeTweetViewController
             composeTweetController.delegate = self
+        } else if (segue.identifier == "HomeTimelineToProfile") {
+            var profileController = segue.destinationViewController as ProfileViewController
+            profileController.user = sender as? User
         }
     }
 }
