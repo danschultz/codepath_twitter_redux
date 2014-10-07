@@ -50,7 +50,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             },
             failure: { (operation, error) in
                 handler(nil, error)
-        })
+            })
     }
     
     func updateStatus(status: String, inReplyToStatusId: Int?, handler: ((Tweet!, NSError!) -> Void)!) {

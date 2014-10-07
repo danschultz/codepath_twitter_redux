@@ -89,9 +89,8 @@ class SplashViewController: UIViewController {
         
         if (tempSender == self) {
             if (segue.identifier == "SplashToMain") {
-//                var navigationController = segue.destinationViewController as UINavigationController
-//                var timelineViewController = navigationController.childViewControllers[0] as HomeTimelineViewController
-//                timelineViewController.tweets = initialTweets
+                var mainViewController = segue.destinationViewController as MainViewController
+                mainViewController.application = appDelegate.applicationModel
             }
         }
     }

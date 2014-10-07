@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController, MenuViewControllerDelegate {
 
+    var application: Application!
+    
     var slideMenuViewController: SlideMenuViewController!
     
     override func viewDidLoad() {
@@ -21,9 +23,11 @@ class MainViewController: UIViewController, MenuViewControllerDelegate {
         
         slideMenuViewController = storyboard?.instantiateViewControllerWithIdentifier("SlideMenuViewController") as SlideMenuViewController
         view.addSubview(slideMenuViewController.view)
+        addChildViewController(slideMenuViewController)
         
         slideMenuViewController.menuViewController = menuNavigationController
-        showTimelineView()
+//        showTimelineView()
+        showProfileView()
     }
     
     private func showTimelineView() {
@@ -32,11 +36,21 @@ class MainViewController: UIViewController, MenuViewControllerDelegate {
         slideMenuViewController.mainViewController = timelineNavigationController
     }
     
+    private func showProfileView() {
+        var profileNavigationController = storyboard?.instantiateViewControllerWithIdentifier("ProfileNavigationController") as UINavigationController
+        var profileViewController = profileNavigationController.viewControllers[0] as ProfileViewController
+        profileViewController.user = application.signedInUser
+        slideMenuViewController.mainViewController = profileNavigationController
+    }
+    
     // MARK: - Menu View Delegate
     func menuViewControllerDidSelectOption(option: NSDictionary) {
         if (option["title"] as String == "Timeline") {
             showTimelineView()
+        } else if (option["title"] as String == "Profile") {
+            showProfileView()
         }
+        
         slideMenuViewController.closeMenu()
     }
 }

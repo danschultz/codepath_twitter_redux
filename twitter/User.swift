@@ -11,8 +11,12 @@ import UIKit
 class User: NSObject {
     var name: String
     var screenName: String
+    var profileBannerUrl: NSURL?
     var profileImageUrl: NSURL
     var tagline: String?
+    var followersCount: Int
+    var friendsCount: Int
+    var statusesCount: Int
     
     var timeline: [Tweet]
     
@@ -21,6 +25,14 @@ class User: NSObject {
         screenName = values["screen_name"] as String
         profileImageUrl = NSURL(string: values["profile_image_url"] as String)
         tagline = values["tagline"] as? String
+        followersCount = values["followers_count"] as Int
+        friendsCount = values["friends_count"] as Int
+        statusesCount = values["statuses_count"] as Int
+        
+        if let suppliedProfileBannerUrl = values["profile_banner_url"] as? String {
+            profileBannerUrl = NSURL(string: suppliedProfileBannerUrl)
+        }
+        
         timeline = []
     }
     

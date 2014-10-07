@@ -16,6 +16,10 @@ class SlideMenuViewController: UIViewController {
             return _menuViewController
         }
         set {
+            if let oldViewController = _menuViewController {
+                removeViewController(oldViewController)
+            }
+            
             _menuViewController = newValue
             
             if let newViewController = newValue {
@@ -32,6 +36,10 @@ class SlideMenuViewController: UIViewController {
             return _mainViewController
         }
         set {
+            if let oldViewController = _mainViewController {
+                removeViewController(oldViewController)
+            }
+            
             _mainViewController = newValue
             
             if let newViewController = newValue {
@@ -51,7 +59,6 @@ class SlideMenuViewController: UIViewController {
         super.viewDidLoad()
         
         if let suppliedMenuViewController = menuViewController {
-            println("adding menu")
             addViewToContainer(menuContainerView, view: suppliedMenuViewController.view)
         }
         
@@ -95,6 +102,19 @@ class SlideMenuViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    private func addViewControllerToContainer(viewController: UIViewController, container: UIView) {
+        addChildViewController(viewController)
+        view.frame = container.frame
+        container.addSubview(view)
+        viewController.didMoveToParentViewController(self)
+    }
+    
+    private func removeViewController(viewController: UIViewController) {
+        viewController.willMoveToParentViewController(nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParentViewController()
+    }
+    
     private func addViewToContainer(container: UIView, view: UIView) {
         view.frame = container.frame
         
