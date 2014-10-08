@@ -23,19 +23,25 @@ PODS:
   - BDBOAuth1Manager (1.4.0):
     - AFNetworking/NSURLConnection (~> 2.4.0)
     - AFNetworking/NSURLSession (~> 2.4.0)
+  - GPUImage (0.1.6)
   - MBProgressHUD (0.9)
   - NSDateMinimalTimeAgo (0.1.0)
+  - UIImage-Resize (1.0.1)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
+  - GPUImage
   - MBProgressHUD
   - NSDateMinimalTimeAgo
+  - UIImage-Resize
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
   BDBOAuth1Manager: 4f0967110286edd4c7961cf48a4eb242c64137a1
+  GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   NSDateMinimalTimeAgo: 11f443d88edcfc2af23309b2641fd063c3d3a125
+  UIImage-Resize: fc57263eed2cd98f74e5ba4848bedae979a0bdf0
 
 COCOAPODS: 0.33.1

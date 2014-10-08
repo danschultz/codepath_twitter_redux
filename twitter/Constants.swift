@@ -8,4 +8,4 @@
 
 import Foundation
 
-let twitterPrimaryColor = UIColor(red: 85 / 255, green: 172 / 255, blue: 238, alpha: 1.0)
+let twitterPrimaryColor = UIColor(red: 85 / 255, green: 172 / 255, blue: 238 / 255, alpha: 1.0)

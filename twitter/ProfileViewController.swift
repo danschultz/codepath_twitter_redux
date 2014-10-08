@@ -10,13 +10,22 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
 
+    @IBOutlet weak var blackOverlayView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var realNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var headerViewTopConstraint: NSLayoutConstraint!
+    
+    var loadedBackgroundImage: UIImage!
+    var radiusToBlurredImage = [Int: UIImage]()
+    var resizeQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     
     var user: User!
     var applicationModel: Application!
+    
+    // Just hardcoding this for now. The size is the height of the header.
+    let originalContentOffset = CGFloat(-64)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +43,17 @@ class ProfileViewController: UITableViewController {
         }
         
         updateControls()
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        // Adjust the height of the header view when the user reaches the edges of the scroll view.
+        var offsetY = originalContentOffset - scrollView.contentOffset.y
+        headerViewTopConstraint.constant = min(-offsetY, 0)
+        
+        if (loadedBackgroundImage != nil) {
+            var radius = max(0, min(5, Int(offsetY / 5)))
+            backgroundImage.image = blurImageWithGpu(loadedBackgroundImage!, radius: radius)
+        }
     }
 
     // MARK: - Table view data source
@@ -79,6 +99,22 @@ class ProfileViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if (indexPath.section == 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if (indexPath.section == 0) {
+            return nil
+        } else {
+            return indexPath
+        }
+    }
+    
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "ProfileToTweet") {
@@ -90,11 +126,52 @@ class ProfileViewController: UITableViewController {
     // MARK: - Private API
     private func updateControls() {
         if let profileBannerUrl = user.profileBannerUrl {
-            backgroundImage.setImageWithURL(profileBannerUrl)
+            var request = NSURLRequest(URL: profileBannerUrl)
+            backgroundImage.setImageWithURLRequest(request, placeholderImage: nil, success: { (request, response, image) -> Void in
+                self.handleBackgroundImageLoaded(image)
+            }, failure: { (request, response, error) -> Void in
+                // handle error
+            })
         }
         profileImage.setImageWithURL(user.profileImageUrl)
         realNameLabel.text = user.name
         screenNameLabel.text = "@\(user.screenName)"
+    }
+    
+    private func handleBackgroundImageLoaded(image: UIImage) {
+        // resize the image to a smaller version, to make blurring faster
+        var resizedImage = image.resizedImageToFitInSize(CGSize(width: 300, height: 300), scaleIfSmaller: true)
+        
+        loadedBackgroundImage = resizedImage
+        backgroundImage.image = blurImageWithGpu(resizedImage, radius: 0)
+        
+        for radius in 1...5 {
+            queueBlurBackgroundImageOperation(radius)
+        }
+    }
+    
+    private func queueBlurBackgroundImageOperation(radius: Int) {
+        var operation = NSBlockOperation() {
+            self.createAndCacheBlurredBackgroundImage(radius)
+        }
+        operation.queuePriority = NSOperationQueuePriority.Normal
+        operation.qualityOfService = NSQualityOfService.Background
+        resizeQueue.addOperation(operation)
+    }
+    
+    private func createAndCacheBlurredBackgroundImage(radius: Int) {
+        println("creating blurred image \(radius)")
+        blurImageWithGpu(loadedBackgroundImage, radius: radius)
+    }
+    
+    private func blurImageWithGpu(image: UIImage, radius: Int) -> UIImage {
+        if (radiusToBlurredImage[radius] == nil) {
+            var filter = GPUImageGaussianBlurFilter()
+            filter.blurRadiusInPixels = CGFloat(radius)
+            
+            radiusToBlurredImage[radius] = filter.imageByFilteringImage(image)
+        }
+        return radiusToBlurredImage[radius]!
     }
 
 }
