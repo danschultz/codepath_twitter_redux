@@ -22,7 +22,7 @@ Completed user stories:
 
 Notes:
 
-I found the profile header blurring to be an interesting problem, and spent most of my extra time exploring the CoreImage and NSOperationQueue APIs. I ended up using [GPUImage](https://github.com/BradLarson/GPUImage) and caching a series of blurred images in a background queue to make the interaction smooth.
+I found the profile header blurring to be an interesting problem, and spent most of my extra time playing with the CoreImage and NSOperationQueue APIs. I ended up using [GPUImage](https://github.com/BradLarson/GPUImage) and caching a series of blurred images in a background queue to make the interaction smooth.
 
 Walkthrough of all user stories:
 
