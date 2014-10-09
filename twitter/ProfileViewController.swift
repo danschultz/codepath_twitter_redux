@@ -18,8 +18,6 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var headerViewTopConstraint: NSLayoutConstraint!
     
     var loadedBackgroundImage: UIImage!
-    var radiusToBlurredImage = [Int: UIImage]()
-    var resizeQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     
     var user: User!
     var applicationModel: Application!
@@ -51,8 +49,10 @@ class ProfileViewController: UITableViewController {
         headerViewTopConstraint.constant = min(-offsetY, 0)
         
         if (loadedBackgroundImage != nil) {
-            var radius = max(0, min(5, Int(offsetY / 5)))
+            var radius = max(0, min(10, Int(offsetY / 5)))
             backgroundImage.image = blurImageWithGpu(loadedBackgroundImage!, radius: radius)
+            
+            println(offsetY)
         }
     }
 
@@ -144,34 +144,12 @@ class ProfileViewController: UITableViewController {
         
         loadedBackgroundImage = resizedImage
         backgroundImage.image = blurImageWithGpu(resizedImage, radius: 0)
-        
-        for radius in 1...5 {
-            queueBlurBackgroundImageOperation(radius)
-        }
-    }
-    
-    private func queueBlurBackgroundImageOperation(radius: Int) {
-        var operation = NSBlockOperation() {
-            self.createAndCacheBlurredBackgroundImage(radius)
-        }
-        operation.queuePriority = NSOperationQueuePriority.Normal
-        operation.qualityOfService = NSQualityOfService.Background
-        resizeQueue.addOperation(operation)
-    }
-    
-    private func createAndCacheBlurredBackgroundImage(radius: Int) {
-        println("creating blurred image \(radius)")
-        blurImageWithGpu(loadedBackgroundImage, radius: radius)
     }
     
     private func blurImageWithGpu(image: UIImage, radius: Int) -> UIImage {
-        if (radiusToBlurredImage[radius] == nil) {
-            var filter = GPUImageGaussianBlurFilter()
-            filter.blurRadiusInPixels = CGFloat(radius)
-            
-            radiusToBlurredImage[radius] = filter.imageByFilteringImage(image)
-        }
-        return radiusToBlurredImage[radius]!
+        var filter = GPUImageGaussianBlurFilter()
+        filter.blurRadiusInPixels = CGFloat(radius)
+        return filter.imageByFilteringImage(image)
     }
 
 }

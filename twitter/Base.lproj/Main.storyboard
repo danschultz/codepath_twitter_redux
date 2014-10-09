@@ -516,17 +516,11 @@
                                         <constraint firstItem="xpc-6U-jna" firstAttribute="leading" secondItem="v99-D0-kib" secondAttribute="trailing" constant="8" id="2SE-ff-nAb"/>
                                         <constraint firstItem="v99-D0-kib" firstAttribute="top" secondItem="FaS-CL-KVm" secondAttribute="topMargin" id="G0g-po-Vea"/>
                                         <constraint firstItem="xpc-6U-jna" firstAttribute="top" secondItem="2kC-b1-daX" secondAttribute="bottom" id="G12-z6-pRx"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="xpc-6U-jna" secondAttribute="bottom" constant="25" id="LTC-tb-sa1"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="v99-D0-kib" secondAttribute="bottom" id="Pj2-Fc-Kdm"/>
                                         <constraint firstItem="2kC-b1-daX" firstAttribute="top" secondItem="FaS-CL-KVm" secondAttribute="topMargin" id="hKy-Aq-5Bi"/>
                                         <constraint firstItem="2kC-b1-daX" firstAttribute="leading" secondItem="v99-D0-kib" secondAttribute="trailing" constant="8" id="lbg-KK-oCn"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="xpc-6U-jna" secondAttribute="bottom" constant="25" id="mNR-Ua-gLe"/>
                                         <constraint firstItem="v99-D0-kib" firstAttribute="leading" secondItem="FaS-CL-KVm" secondAttribute="leadingMargin" id="rj5-vU-y7e"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Pj2-Fc-Kdm"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="fullNameLabel" destination="2kC-b1-daX" id="siE-1b-LU8"/>

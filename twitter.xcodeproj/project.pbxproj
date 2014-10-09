@@ -262,6 +262,7 @@
 				TargetAttributes = {
 					377EDCE519D410D20024BF07 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 4RD39L9JLH;
 					};
 					377EDCFA19D410D20024BF07 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -497,6 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
